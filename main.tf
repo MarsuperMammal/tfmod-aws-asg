@@ -9,6 +9,7 @@ variable "ami_id" {}
 variable "userdata" {}
 variable "instance_type" {}
 variable "asg_sgs" { type = "list" }
+variable "datacenter" {}
 
 # For multiple scaling policies, copy the scale_ variables and add a uniqueness character
 # Then duplicate the scale_policy module with the updated variables
