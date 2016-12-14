@@ -10,7 +10,8 @@ variable "userdata" {}
 variable "instance_type" {}
 variable "asg_sgs" { type = "list" }
 variable "datacenter" {}
-
+variable "consul_server_join_tag_value" {}
+variable "consul_server_join_tag_key" {}
 # For multiple scaling policies, copy the scale_ variables and add a uniqueness character
 # Then duplicate the scale_policy module with the updated variables
 variable "scale_adjustment_type" { default = "" }
@@ -55,6 +56,11 @@ resource "aws_autoscaling_group" "asg" {
   tag {
     key = "Name"
     value = "${var.app_name}"
+    propagate_at_launch = true
+  }
+  tag {
+    key = "${var.consul_server_join_tag_key}"
+    value = "${var.consul_server_join_tag_value}"
     propagate_at_launch = true
   }
 }
