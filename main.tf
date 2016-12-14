@@ -60,7 +60,7 @@ resource "aws_autoscaling_group" "asg" {
 
 module "scale_policy" {
   source = "./scale_policy"
-  count = "${coalesce(var.scale_policy_enabled, 0)}"
+  count = "${var.scale_policy_enabled ? 1:0)}"
   asg_name = "${aws_autoscaling_group.asg.name}"
   adjustment_type = "${var.scale_adjustment_type}"
   alarm_actions = "${var.scale_alarm_actions}"
